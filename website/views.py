@@ -8,8 +8,8 @@ import requests
 
 
 def index(request):
-    product = requests.get("http://127.0.0.1:9000/products/")
-    partner = requests.get("http://127.0.0.1:7000/partners/")
+    product = requests.get("http://54.233.152.85:32768/products/")
+    partner = requests.get("https://partner-i7kbbnevfa-uw.a.run.app/partners/")
     res = {
         'objeto': product.json(),
         'partner': partner.json(),
@@ -57,7 +57,7 @@ def login_user(request):
 
 
 def product_list(request):
-    product = requests.get("http://127.0.0.1:9000/products/")
+    product = requests.get("http://54.233.152.85:32768/products/")
     res = {
         'objeto':product.json(),
     }
@@ -65,7 +65,7 @@ def product_list(request):
 
 
 def partner_list(request):
-    partner = requests.get("http://127.0.0.1:7000/partners/")
+    partner = requests.get("https://partner-i7kbbnevfa-uw.a.run.app/partners/")
     res = {
         'partner':partner.json(),
     }

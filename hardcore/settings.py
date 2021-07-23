@@ -25,7 +25,7 @@ SECRET_KEY = 'x!%d0(fcj4+v$!w=o0oote0he!p%x^p)g5u3@zs2@qimtt$#sg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'hardcore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hardcore',
+        'USER': 'microsservice3@hardcore',
+        'PASSWORD': 'AuceloraTeste3',
+        'HOST': 'hardcore.postgres.database.azure.com',
+        'PORT': '5432'
     }
 }
 
@@ -121,4 +125,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = '/var/www/html/hardcore/static/'
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/html/hardcore/media/'
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass

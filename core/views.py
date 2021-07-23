@@ -8,8 +8,8 @@ import requests
 
 
 def index(request):
-    products = requests.get("http://127.0.0.1:9000/products/")
-    partners = requests.get("http://127.0.0.1:7000/partners/")
+    products = requests.get("http://54.233.152.85:32768/products/")
+    partners = requests.get("https://partner-i7kbbnevfa-uw.a.run.app/partners/")
     context = {
         'product': len(products.json()),
         'partner': len(partners.json())
@@ -25,7 +25,7 @@ def logout_user(request):
 
 # Functions of the service partner
 def manage_partner(request):
-    object_list = requests.get("http://127.0.0.1:7000/partners/")
+    object_list = requests.get("https://partner-i7kbbnevfa-uw.a.run.app/partners/")
     return render(request, 'partner/manage_partner.html', {'objetos': object_list.json()})
 
 
@@ -35,14 +35,14 @@ def add_partner(request):
         description = request.POST['description']
         name = request.POST['name']
         content = {"name": name, "description": description, "id_athletic": 1}
-        r = requests.post("http://127.0.0.1:7000/partners/", data=content, files={"logo": logo})
+        r = requests.post("https://partner-i7kbbnevfa-uw.a.run.app/partners/", data=content, files={"logo": logo})
         return HttpResponseRedirect(reverse('core:manage_partners'))
     return render(request, 'partner/add_partner.html')
 
 
 def views_partner(request, id):
     query = {"id": id}
-    partner = requests.get("http://127.0.0.1:7000/partners/", params=query)
+    partner = requests.get("https://partner-i7kbbnevfa-uw.a.run.app/partners/", params=query)
     print((partner.json()))
 
     res = {
@@ -54,7 +54,7 @@ def views_partner(request, id):
 
 # Functions of the service Product
 def manage_products(request):
-    object_list = requests.get("http://127.0.0.1:9000/products/")
+    object_list = requests.get("http://54.233.152.85:32768/products/")
     return render(request, 'product/manage_products.html', {'objetos': object_list.json()})
 
 
@@ -64,7 +64,7 @@ def add_product(request):
         name = request.POST['name']
         value = request.POST['value']
         content = {"name": name, "value": value, "id_athletic": 1}
-        r = requests.post("http://127.0.0.1:9000/products/", data=content, files={"image": logo})
+        r = requests.post("http://54.233.152.85:32768/products/", data=content, files={"image": logo})
         return HttpResponseRedirect(reverse('core:manage_products'))
     return render(request, 'product/add_product.html')
 
@@ -72,7 +72,7 @@ def add_product(request):
 def views_product(request, id):
     print("Id - ", id)
     query = {"id": id}
-    product = requests.get("http://127.0.0.1:9000/products/", params=query)
+    product = requests.get("http://54.233.152.85:32768/products/", params=query)
     print((product.json()))
 
     res = {
